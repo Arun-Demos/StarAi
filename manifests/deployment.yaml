@@ -20,6 +20,7 @@ spec:
       containers:
         - name: starai-web
           image: arunrana1214/starai:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           envFrom:
