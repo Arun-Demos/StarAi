@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StarAi Services</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f8;
+            color: #333;
+            margin: 2em;
+        }
+        h1 {
+            text-align: center;
+            color: #1e88e5;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 70%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: white;
+        }
+        th, td {
+            padding: 1em;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #1e88e5;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        caption {
+            caption-side: bottom;
+            padding: 1em;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>StarAi Services</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Subscribers</th>
+                <th>Revenue ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in services %}
+            <tr>
+                <td>{{ s.name }}</td>
+                <td>{{ s.subscribers }}</td>
+                <td>{{ '{:,.2f}'.format(s.revenue) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <caption>Live data from AWS RDS (PostgreSQL) using secrets from Conjur Cloud</caption>
+    </table>
+</body>
+</html>
