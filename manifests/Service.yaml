@@ -1,1 +1,12 @@
-
+apiVersion: v1
+kind: Service
+metadata:
+  name: starai-web-service
+  namespace: starai-demo
+spec:
+  selector:
+    app: starai-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
