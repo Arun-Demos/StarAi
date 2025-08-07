@@ -22,7 +22,7 @@ spec:
           image: arunrana1214/starai:latest
           ports:
             - containerPort: 80
-         envFrom:
+          envFrom:
           - configMapRef:
               name: conjur-connect
           volumeMounts:
