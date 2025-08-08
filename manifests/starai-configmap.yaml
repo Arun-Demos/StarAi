@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: starai-web-config
+  namespace: starai-demo
+data:
+  DB_NAME: postgres
+  CONJUR_TOKEN_PATH: /run/conjur/access-token
