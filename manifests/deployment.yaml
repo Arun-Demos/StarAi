@@ -50,22 +50,6 @@ spec:
             - name: conjur-access-token
               mountPath: /run/conjur
               readOnly: true
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 80
-            initialDelaySeconds: 3
-            periodSeconds: 10
-            timeoutSeconds: 2
-            failureThreshold: 6
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 80
-            initialDelaySeconds: 10
-            periodSeconds: 20
-            timeoutSeconds: 2
-            failureThreshold: 3
           resources:
             requests:
               cpu: "50m"
@@ -73,9 +57,6 @@ spec:
             limits:
               cpu: "500m"
               memory: "512Mi"
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
 
         - name: authenticator
           image: cyberark/conjur-authn-k8s-client
