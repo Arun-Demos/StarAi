@@ -95,16 +95,16 @@ spec:
                 aws sts get-caller-identity
 
                 echo "[INFO] Deploying configmap"
-                kubectl apply -f manifest/starai-configmap.yaml
+                kubectl apply -f manifests/starai-configmap.yaml
                 
                 echo "[INFO] Deploying Application Pod"
-                kubectl apply -f manifest/deployment.yaml
+                kubectl apply -f manifests/deployment.yaml
 
                 echo "[INFO] Deploying Service"
-                kubectl apply -f manifest/Service.yaml
+                kubectl apply -f manifests/Service.yaml
 
                 echo "[INFO] Deploying Ingress"
-                kubectl apply -f manifest/Ingress.yaml
+                kubectl apply -f manifests/Ingress.yaml
               '''
             }
           }
@@ -119,7 +119,6 @@ spec:
         sh '''
           echo "[INFO] Cleaning up workspace and kube artifacts..."
           rm -rf ${REPO_DIR}
-          kubectl delete -f ${REPO_DIR}/myweb.yaml || true
         '''
       }
     }
