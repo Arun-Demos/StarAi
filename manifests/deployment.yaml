@@ -22,7 +22,14 @@ spec:
           image: arunrana1214/starai:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 8443
+          command: ["/bin/sh","-lc"]
+          args:
+            - >
+              exec gunicorn --workers 2 --threads 4
+              --bind 0.0.0.0:8443
+              --certfile /tls/tls.crt --keyfile /tls/tls.key
+              app:app
           env:
             # from your existing conjur-connect (already present for the sidecar)
             - name: CONJUR_API_BASE
@@ -47,6 +54,9 @@ spec:
                   name: starai-web-config
                   key: DB_NAME
           volumeMounts:
+            - name: starai-tls
+              mountPath: /tls
+              readOnly: true
             - name: conjur-access-token
               mountPath: /run/conjur
               readOnly: true
@@ -76,6 +86,9 @@ spec:
               mountPath: /var/run/secrets/tokens
 
       volumes:
+        - name: starai-tls
+          secret:
+            secretName: starai-tls
         - name: conjur-access-token
           emptyDir:
             medium: Memory
