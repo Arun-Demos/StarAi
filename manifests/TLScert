@@ -1,0 +1,15 @@
+# starai-tls-certificate.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: starai-tls
+  namespace: starai-demo
+spec:
+  secretName: starai-tls         # will hold tls.crt / tls.key
+  commonName: starai.sgcybersec.com  # CN
+  dnsNames:
+    - starai.sgcybersec.com          # same host as Ingress
+  issuerRef:
+    name: venafi-privateca-cluster-issuer
+    kind: VenafiClusterIssuer
+    group: "jetstack.io"
