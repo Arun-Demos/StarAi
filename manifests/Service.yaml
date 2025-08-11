@@ -9,5 +9,6 @@ spec:
     app: starai-web
   ports:
   - name: https
+    protocol: TCP
     port: 443
     targetPort: 8443
