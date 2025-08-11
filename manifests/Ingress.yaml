@@ -20,7 +20,7 @@ metadata:
     alb.ingress.kubernetes.io/healthcheck-path: /healthz
 spec:
   rules:
-    - host: starai.yourdomain.com
+    - host: starai.sgcybersec.com
       http:
         paths:
           - path: /
