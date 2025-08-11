@@ -7,16 +7,26 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    # Listeners: 80 + 443 on the ALB
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
+    # ACM cert on the ALB (Venafi-issued)
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:<ACCOUNT_ID>:certificate/<UUID>
+    # Redirect HTTP -> HTTPS on ALB
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    # Talk HTTPS to pods
+    alb.ingress.kubernetes.io/backend-protocol: HTTPS
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTPS
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
     alb.ingress.kubernetes.io/healthcheck-path: /healthz
 spec:
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: starai-web   # must match the Service name exactly
-            port:
-              number: 80
+    - host: starai.yourdomain.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: starai-web
+                port:
+                  number: 443
