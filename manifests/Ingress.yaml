@@ -7,7 +7,7 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/security-groups: sg-0635c868239672b88
+    alb.ingress.kubernetes.io/inbound-cidrs: "208.127.214.121/32"
     # Listeners: 80 + 443 on the ALB
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
     # ACM cert on the ALB (Venafi-issued)
